@@ -79,13 +79,6 @@ const HeroSection = () => {
           >
             Get Started
           </Button>
-          <Button 
-            variant="outline" 
-            size="lg" 
-            className="bg-white/5 hover:bg-white/10 text-white rounded-full px-8 py-6 text-lg border border-white/20"
-          >
-            Watch Demo
-          </Button>
         </motion.div>
       </div>
 
