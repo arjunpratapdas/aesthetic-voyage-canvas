@@ -57,13 +57,6 @@ const CallToAction = () => {
             >
               Start Free Trial
             </Button>
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="bg-white/5 hover:bg-white/10 text-white rounded-full px-8 py-6 text-lg border border-white/20"
-            >
-              Schedule Demo
-            </Button>
           </motion.div>
         </div>
       </motion.div>
