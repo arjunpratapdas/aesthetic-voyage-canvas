@@ -2,6 +2,7 @@
 import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { Image } from 'lucide-react';
 
 const HeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -98,8 +99,21 @@ const HeroSection = () => {
         <div className="relative h-[300px] sm:h-[400px] md:h-[500px] w-full glass-morphism rounded-xl overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-full h-full bg-gradient-to-tr from-purple-500/10 to-indigo-500/10">
-              <div className="flex items-center justify-center h-full">
-                <span className="text-2xl text-white/50">AI Interface Preview</span>
+              <div className="flex flex-col items-center justify-center h-full">
+                <div className="relative w-full h-full">
+                  <img 
+                    src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" 
+                    alt="AI Design Interface" 
+                    className="w-full h-full object-cover opacity-60"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="bg-black/30 backdrop-blur-md p-4 rounded-lg flex items-center">
+                      <Image className="mr-2" size={24} />
+                      <span className="text-xl text-white">AI Design Assistant</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

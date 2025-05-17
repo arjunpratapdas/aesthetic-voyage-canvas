@@ -2,9 +2,12 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { Moon, Sun } from 'lucide-react';
+import { Toggle } from '@/components/ui/toggle';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +22,12 @@ const Navbar = () => {
       document.removeEventListener('scroll', handleScroll);
     };
   }, [scrolled]);
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+    // In a real implementation, we would apply the theme change to the document
+    // For this demo, we're just toggling the state
+  };
 
   return (
     <motion.header
@@ -41,7 +50,7 @@ const Navbar = () => {
         </div>
 
         <nav className="hidden md:flex items-center space-x-8">
-          {['Features', 'Gallery', 'Pricing', 'Testimonials'].map((item) => (
+          {['Features', 'Pricing', 'Testimonials'].map((item) => (
             <motion.a
               key={item}
               href={`#${item.toLowerCase()}`}
@@ -55,30 +64,23 @@ const Navbar = () => {
         </nav>
 
         <div className="flex items-center space-x-4">
-          <Button 
-            variant="ghost" 
-            className="text-white hover:bg-white/10 rounded-full px-4"
-            asChild
+          <Toggle 
+            className="bg-white/10 hover:bg-white/20 rounded-full p-2"
+            pressed={isDarkMode}
+            onPressedChange={toggleTheme}
           >
-            <motion.a 
-              href="#login"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Sign In
-            </motion.a>
-          </Button>
+            {isDarkMode ? <Moon size={18} /> : <Sun size={18} />}
+          </Toggle>
+          
           <Button 
             className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-full px-6 hover:opacity-90 transition-opacity"
-            asChild
           >
-            <motion.a 
-              href="#tryit"
+            <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Try Free
-            </motion.a>
+              Get Started
+            </motion.span>
           </Button>
         </div>
       </div>
