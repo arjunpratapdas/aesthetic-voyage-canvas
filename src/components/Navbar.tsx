@@ -1,9 +1,8 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { Moon, Sun } from 'lucide-react';
 import { Toggle } from '@/components/ui/toggle';
+import { Moon, Sun } from 'lucide-react';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -23,10 +22,29 @@ const Navbar = () => {
     };
   }, [scrolled]);
 
+  useEffect(() => {
+    // Check if user has a preference stored
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+      setIsDarkMode(storedTheme === 'dark');
+    } else {
+      // Check system preference
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setIsDarkMode(systemPrefersDark);
+    }
+  }, []);
+
   const toggleTheme = () => {
+    const newTheme = !isDarkMode ? 'dark' : 'light';
     setIsDarkMode(!isDarkMode);
-    // In a real implementation, we would apply the theme change to the document
-    // For this demo, we're just toggling the state
+    // Store user preference
+    localStorage.setItem('theme', newTheme);
+    // Apply theme to document
+    if (newTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   };
 
   return (
@@ -63,7 +81,7 @@ const Navbar = () => {
           ))}
         </nav>
 
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center">
           <Toggle 
             className="bg-white/10 hover:bg-white/20 rounded-full p-2"
             pressed={isDarkMode}
@@ -71,17 +89,6 @@ const Navbar = () => {
           >
             {isDarkMode ? <Moon size={18} /> : <Sun size={18} />}
           </Toggle>
-          
-          <Button 
-            className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-full px-6 hover:opacity-90 transition-opacity"
-          >
-            <motion.span
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Get Started
-            </motion.span>
-          </Button>
         </div>
       </div>
     </motion.header>

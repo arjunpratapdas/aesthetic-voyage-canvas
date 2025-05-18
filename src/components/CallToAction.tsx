@@ -27,12 +27,12 @@ const CallToAction = () => {
           <div className="absolute -bottom-24 -left-24 w-64 h-64 rounded-full bg-indigo-600/20 filter blur-3xl" />
           
           <motion.h2 
-            className="text-gradient text-3xl sm:text-4xl md:text-5xl font-bold mb-6 relative z-10"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 relative z-10 text-white"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            Ready to Transform Your Design Process?
+            Ready to Transform Your Desi<span className="inline-block">g</span>n Process?
           </motion.h2>
           
           <motion.p 
@@ -43,8 +43,6 @@ const CallToAction = () => {
           >
             Join thousands of designers and teams who are already using Aesthetic to create stunning designs in a fraction of the time.
           </motion.p>
-          
-          {/* Removed the Button component and its containing motion.div */}
         </div>
       </motion.div>
     </section>
