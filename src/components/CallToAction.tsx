@@ -1,7 +1,6 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Button } from '@/components/ui/button';
 
 const CallToAction = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -45,19 +44,7 @@ const CallToAction = () => {
             Join thousands of designers and teams who are already using Aesthetic to create stunning designs in a fraction of the time.
           </motion.p>
           
-          <motion.div 
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-          >
-            <Button 
-              size="lg" 
-              className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-full px-8 py-6 text-lg hover:opacity-90 transition-opacity"
-            >
-              Start Free Trial
-            </Button>
-          </motion.div>
+          {/* Removed the Button component and its containing motion.div */}
         </div>
       </motion.div>
     </section>
