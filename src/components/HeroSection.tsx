@@ -1,7 +1,6 @@
 
 import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
 import { Image } from 'lucide-react';
 
 const HeroSection = () => {
@@ -67,19 +66,7 @@ const HeroSection = () => {
           Aesthetic combines cutting-edge AI with intuitive design tools to transform your creative process. Experience design that adapts to you.
         </motion.p>
 
-        <motion.div 
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          <Button 
-            size="lg" 
-            className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-full px-8 py-6 text-lg hover:opacity-90 transition-opacity"
-          >
-            Get Started
-          </Button>
-        </motion.div>
+        {/* Get Started button removed */}
       </div>
 
       <motion.div 

@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Toggle } from '@/components/ui/toggle';
+import { Switch } from '@/components/ui/switch';
 import { Moon, Sun } from 'lucide-react';
 
 const Navbar = () => {
@@ -30,38 +30,26 @@ const Navbar = () => {
     
     if (storedTheme) {
       setIsDarkMode(storedTheme === 'dark');
-      if (storedTheme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
+      document.documentElement.classList.toggle('dark', storedTheme === 'dark');
     } else {
       // Check system preference
       const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       setIsDarkMode(systemPrefersDark);
       
       // Apply theme based on system preference
-      if (systemPrefersDark) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
+      document.documentElement.classList.toggle('dark', systemPrefersDark);
     }
   }, []);
 
   const toggleTheme = () => {
-    const newTheme = !isDarkMode ? 'dark' : 'light';
-    setIsDarkMode(!isDarkMode);
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
     
     // Store user preference
-    localStorage.setItem('theme', newTheme);
+    localStorage.setItem('theme', newMode ? 'dark' : 'light');
     
     // Apply theme to document
-    if (newTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    document.documentElement.classList.toggle('dark', newMode);
   };
 
   return (
@@ -98,14 +86,13 @@ const Navbar = () => {
           ))}
         </nav>
 
-        <div className="flex items-center">
-          <Toggle 
-            className="bg-white/10 hover:bg-white/20 rounded-full p-2"
-            pressed={isDarkMode}
-            onPressedChange={toggleTheme}
-          >
-            {isDarkMode ? <Moon size={18} /> : <Sun size={18} />}
-          </Toggle>
+        <div className="flex items-center space-x-2">
+          <span className="text-sm mr-2">{isDarkMode ? <Moon size={18} /> : <Sun size={18} />}</span>
+          <Switch 
+            checked={isDarkMode}
+            onCheckedChange={toggleTheme}
+            className="bg-white/10 data-[state=checked]:bg-purple-500"
+          />
         </div>
       </div>
     </motion.header>
