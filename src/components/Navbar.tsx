@@ -6,8 +6,9 @@ import { Moon, Sun } from 'lucide-react';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
+  // Handle scroll event to change navbar appearance
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 20;
@@ -22,23 +23,39 @@ const Navbar = () => {
     };
   }, [scrolled]);
 
+  // Set initial theme based on user preference or system preference
   useEffect(() => {
     // Check if user has a preference stored
     const storedTheme = localStorage.getItem('theme');
+    
     if (storedTheme) {
       setIsDarkMode(storedTheme === 'dark');
+      if (storedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
     } else {
       // Check system preference
       const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       setIsDarkMode(systemPrefersDark);
+      
+      // Apply theme based on system preference
+      if (systemPrefersDark) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
     }
   }, []);
 
   const toggleTheme = () => {
     const newTheme = !isDarkMode ? 'dark' : 'light';
     setIsDarkMode(!isDarkMode);
+    
     // Store user preference
     localStorage.setItem('theme', newTheme);
+    
     // Apply theme to document
     if (newTheme === 'dark') {
       document.documentElement.classList.add('dark');

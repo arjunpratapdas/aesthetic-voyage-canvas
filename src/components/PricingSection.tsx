@@ -1,7 +1,6 @@
 
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Button } from '@/components/ui/button';
 import { CheckIcon } from 'lucide-react';
 
 interface PricingTier {
@@ -148,17 +147,7 @@ const PricingSection = () => {
                 ))}
               </ul>
               
-              <div className="text-center">
-                <Button
-                  className={`w-full ${
-                    tier.popular
-                      ? 'bg-gradient-to-r from-purple-500 to-indigo-600 hover:opacity-90'
-                      : 'bg-white/10 hover:bg-white/20 text-white'
-                  } rounded-lg py-6`}
-                >
-                  {tier.name === 'Enterprise' ? 'Contact Sales' : 'Get Started'}
-                </Button>
-              </div>
+              {/* Removed all buttons here */}
             </motion.div>
           ))}
         </div>
